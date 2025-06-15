@@ -1,84 +1,121 @@
-import { useRef, useState } from "react";
-import ModalReadMee from "../modalWind/ModalReadMee";
-// import PATH from "../data/PATH";
+import { useRef } from "react";
 
-const Registration = ({ listsUsers, setObjUser }) => {
-  const articleForm = useRef(); // Ссылка на форму
-  const [readMee, setReadMee] = useState(false);
+const Registration = ({ listsUsers, setRegWindow }) => {
+  const formRegistration = useRef();
 
-  const submitForm = (e) => {
+  const newDataObj = listsUsers.filter((element) => element.login.length >= 3); // Пустые объекты для юзеров
+
+  const getInfoRegistration = (e) => {
     e.preventDefault();
 
-    const formData = new FormData(articleForm.current);
-    const formObj = {};
+    const formDataRegistration = new FormData(formRegistration.current);
+    const registrationData = {}; // -  Данные с формы
 
-    formData.forEach((value, key) => {
-      formObj[key] = value.trim();
+    console.log(registrationData);
+    //  через цикл добавил данные в форму
+    formDataRegistration.forEach((value, key) => {
+      registrationData[key] = value.trim();
     });
 
-    if (!formObj.login || !formObj.password) {
-      alert("Будьласка, заповніть всі поля.");
+    // Проверка наличия необходимых данных
+    if (
+      !registrationData.name ||
+      !registrationData.lastName ||
+      !registrationData.email ||
+      !registrationData.password
+    ) {
+      alert("Please fill out all fields.");
       return;
     }
 
-    const search = listsUsers.find(
-      (us) =>
-        us.password === formObj.password &&
-        us.login.toLowerCase() === formObj.login.toLowerCase()
-    );
-    articleForm.current.reset();
-    if (search === undefined) {
-      alert("Такого користувача не знайдено ");
-      return;
-    }
-    setObjUser(search);
+    //  Создание и добавление в объект логин для нового юзера
+    registrationData.login = `${registrationData.name[0]}${registrationData.lastName[0]}`;
+
+    // Добавление нового пользователя в объект
+
+    const addUserGlobalObj = async () => {
+      try {
+        const response = await fetch(
+          `https://68336dae464b499636ff6c5a.mockapi.io/my/users/user/${newDataObj[0].id}`
+        );
+        const data = await response.json();
+        if (!response.ok) throw new Error("Problems with data retrieval.");
+
+        const addUserResponse = await fetch(
+          `https://68336dae464b499636ff6c5a.mockapi.io/my/users/user/${newDataObj[0].id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ...data, ...registrationData }),
+          }
+        );
+        if (!addUserResponse.ok)
+          throw new Error("Problems with data retrieval.");
+
+        if (addUserResponse.ok) {
+          alert(`
+Thank you for registering`);
+          setTimeout(() => {
+            setRegWindow(true);
+          }, 1000);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    addUserGlobalObj();
   };
-
   return (
-    <div>
-      <div>{readMee && <ModalReadMee users={listsUsers} />}</div>
-      {/* <PATH /> */}
-      <button className="read_mee" onClick={() => setReadMee((pr) => !pr)}>
-        Read me !!!
-      </button>
-      <h1 className="header">Universal World Bank</h1>
-      <div className="container">
-        <form
-          ref={articleForm}
-          onSubmit={submitForm}
-          className="registration_form"
-        >
-          <div className="Login margin-bottom">
-            <label className="text_label" htmlFor="Login">
-              Login
-            </label>
-            <input
-              name="login"
-              type="text"
-              id="login"
-              maxLength={2}
-              // placeholder="Login"
-            />
-          </div>
+    <div className="container">
+      <form
+        className="registration entrance__form"
+        ref={formRegistration}
+        onSubmit={getInfoRegistration}
+      >
+        <label className="label__registration"> Registration</label>
 
-          <div className="password margin-bottom">
-            <label className="text_label" htmlFor="password">
-              Password
-            </label>
-            <input
-              name="password"
-              type="password"
-              id="password"
-              maxLength={4}
-              // placeholder="Password"
-            />
-          </div>
+        <label>Name</label>
+        <input
+          type="text"
+          name="name"
+          required
+          //placeholder="name"
+        />
 
-          <button type="submit" className="btn">
-            Send
-          </button>
-        </form>
-      </div>
+        <label>LastName</label>
+        <input
+          type="text"
+          name="lastName"
+          required
+          // placeholder="lastName"
+        />
+
+        <label>Email</label>
+        <input
+          type="email"
+          name="email"
+          required
+          // placeholder="email"
+        />
+
+        <label>password</label>
+        <input
+          type="password"
+          name="password"
+          minLength={4}
+          required
+          // placeholder="password"
+        />
+
+        <button className="btn" type="submit">
+          Send
+        </button>
+        <span className="cancel" onClick={() => setRegWindow(true)}>
+          &times;
+        </span>
+      </form>
     </div>
   );
 };

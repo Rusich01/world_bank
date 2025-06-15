@@ -5,15 +5,13 @@ const Replenishment = ({ objUser, setObjUser }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const addDateNow = new Date().toISOString();
-  console.log(addDateNow);
-
   const addMoney = async (e) => {
     e.preventDefault();
+    const addDateNow = new Date().toISOString();
     const amount = +inputRef.current.value;
 
     if (isNaN(amount) || amount <= 0) {
-      setError("Введіть правильну суму.");
+      setError("Enter the correct amount..");
       return;
     }
 
@@ -24,7 +22,7 @@ const Replenishment = ({ objUser, setObjUser }) => {
       const response = await fetch(
         `https://68336dae464b499636ff6c5a.mockapi.io/my/users/user/${objUser.id}`
       );
-      if (!response.ok) throw new Error("Проблеми з отриманням даних.");
+      if (!response.ok) throw new Error("Problems with data retrieval.");
 
       const data = await response.json();
       const updatedMovements = [...data.movements, amount];
@@ -39,11 +37,11 @@ const Replenishment = ({ objUser, setObjUser }) => {
           body: JSON.stringify({
             ...data,
             movements: updatedMovements,
-            movementsDates: [...data.movementsDates, addDateNow],
+            movementsDates: [...(data.movementsDates || []), addDateNow],
           }),
         }
       );
-      if (!updateResponse.ok) throw new Error("Помилка при оновленні даних.");
+      if (!updateResponse.ok) throw new Error("Error while updating data.");
 
       const updatedData = await updateResponse.json();
       setObjUser(updatedData);

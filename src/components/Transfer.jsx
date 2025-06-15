@@ -17,7 +17,7 @@ const Transfer = ({ listsUsers, setObjUser, objUser, movements }) => {
       amount <= 0 ||
       amount > movements
     ) {
-      alert("Please enter the correct data.");
+      alert("Please enter the correct amount.");
       return;
     }
 
@@ -72,7 +72,7 @@ const Transfer = ({ listsUsers, setObjUser, objUser, movements }) => {
       );
 
       if (!responseSender.ok) {
-        throw new Error("ошибка при обновлении отправителя ");
+        throw new Error("error updating sender");
       }
 
       const updatedSenderData = await responseSender.json();
@@ -82,7 +82,7 @@ const Transfer = ({ listsUsers, setObjUser, objUser, movements }) => {
       inputSum.current.value = "";
       setObjUser(updatedSenderData);
     } catch (error) {
-      console.error("Ошибка переводда:", error);
+      console.error("Translation error amount:", error);
       alert("An error occurred during the transfer.");
     }
   };

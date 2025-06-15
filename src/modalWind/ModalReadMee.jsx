@@ -6,7 +6,7 @@ const ModalReadMee = ({ users }) => {
         {user.map((us) => (
           <li
             key={us.lastName}
-          >{`Login: "${us.login}"  password: ${us.password}`}</li>
+          >{`Login: "${us.login.toUpperCase()}"  password: ${us.password}`}</li>
         ))}
       </ul>
     </div>

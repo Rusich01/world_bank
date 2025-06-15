@@ -22,7 +22,7 @@ body {
 }
 
 .container {
-  display: flex;
+  display: grid;
   justify-content: center;
   /* margin-top: 10vh; */
 }
@@ -32,7 +32,8 @@ body {
   text-align: center;
 }
 
-.registration_form {
+.entrance__form {
+  position: relative;
   border: 1px solid wheat;
   border-radius: 10px;
   padding: 15px;
@@ -109,12 +110,6 @@ input {
   gap: 2rem;
   transition: all 2s;
 }
-
-/* .appIn {
-  transition: all 2s;
-  z-index: 100;
-   opacity: 100; 
-}  */
 
 .balance {
   display: flex;
@@ -288,22 +283,22 @@ h2 {
   font-size: 12px;
 }
 ::-webkit-scrollbar {
-  width: 8px; /*Ширина вертикального скролла*/
+  width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #242424; /* Цвет фона дорожки */
+  background: #242424;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #888; /* Цвет ползунка */
-  border-radius: 10px; /* Скругление углов */
-  border: 2px solid #f0f0f0; /* Обводка для эффекта отступа */
+  background-color: #888;
+  border-radius: 10px;
+  border: 2px solid #f0f0f0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* Цвет при наведении */
+  background-color: #555;
 }
 .description {
   margin-top: 2.5rem;
@@ -323,4 +318,39 @@ h2 {
   50% {
     opacity: 0;
   }
+}
+.registration {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn_reg {
+  background-color: transparent;
+  border: none;
+  color: #838080;
+  transition: all 0.8s;
+}
+.btn_reg:hover {
+  color: white;
+  cursor: pointer;
+  scale: 1.1;
+}
+.margin__top {
+  margin-top: 1rem;
+}
+.cancel {
+  position: absolute;
+  font-size: 25px;
+  right: 8px;
+  top: 2px;
+  cursor: pointer;
+  transition: all 0.8s;
+}
+.cancel:hover {
+  scale: 1.2;
+}
+.label__registration {
+  margin: 10px 0;
 }

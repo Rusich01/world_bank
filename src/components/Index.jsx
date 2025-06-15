@@ -8,7 +8,7 @@ const Index = ({ objUser, setObjUser, listsUsers }) => {
   useEffect(() => {
     const sum = objUser.movements.reduce((acc, item) => acc + item, 0);
     setMovements(sum);
-  }, [objUser]);
+  }, [objUser, listsUsers]);
 
   return (
     <div>

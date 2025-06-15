@@ -1,7 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import Index from "./components/Index";
-import Registration from "./components/Registration";
+import Entrance from "./components/Entrance";
 
 function App() {
   const [listsUsers, setListsUsers] = useState([]); // список пользователей
@@ -31,7 +31,7 @@ function App() {
   return (
     <div className="wrapper">
       {!Object.keys(objUser).length > 0 && (
-        <Registration listsUsers={listsUsers} setObjUser={setObjUser} />
+        <Entrance listsUsers={listsUsers} setObjUser={setObjUser} />
       )}
       {Object.keys(objUser).length > 0 && (
         <Index
