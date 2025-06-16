@@ -72,7 +72,7 @@ const Entrance = ({ listsUsers, setObjUser }) => {
                 name="password"
                 type="password"
                 id="password"
-                maxLength={4}
+                maxLength={12}
                 // placeholder="Password"
               />
             </div>
@@ -93,7 +93,9 @@ const Entrance = ({ listsUsers, setObjUser }) => {
         </div>
       )}
 
-      {!regWindow && <Registration listsUsers={listsUsers} setRegWindow={setRegWindow} />}
+      {!regWindow && (
+        <Registration listsUsers={listsUsers} setRegWindow={setRegWindow} />
+      )}
     </div>
   );
 };

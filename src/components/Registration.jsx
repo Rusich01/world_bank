@@ -104,7 +104,7 @@ Thank you for registering`);
         <input
           type="password"
           name="password"
-          maxLength={4}
+          maxLength={12}
           required
           placeholder="max length 4"
         />
