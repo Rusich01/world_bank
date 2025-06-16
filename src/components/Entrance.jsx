@@ -59,7 +59,7 @@ const Entrance = ({ listsUsers, setObjUser }) => {
                 name="login"
                 type="text"
                 id="login"
-                maxLength={2}
+                maxLength={12}
                 // placeholder="Login"
               />
             </div>

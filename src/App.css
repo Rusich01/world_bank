@@ -126,10 +126,7 @@ input {
   grid-area: left;
   background-color: #011211;
   border-radius: 1rem;
-  max-height: 388px;
   overflow-y: auto;
-
-  /* box-shadow: inset -10px 0 0 0 #242424; */
 }
 
 .movements__row {
@@ -353,4 +350,19 @@ h2 {
 }
 .label__registration {
   margin: 10px 0;
+}
+
+/* ********************* Mobile size ************************* */
+@media only screen and (max-width: 860px) {
+  .app {
+    position: relative;
+    display: grid;
+    align-self: center;
+    width: 100%;
+    margin: 0 auto;
+    grid-template-columns: 3fr;
+    grid-template-areas: "left";
+    gap: 2rem;
+    transition: all 2s;
+  }
 }

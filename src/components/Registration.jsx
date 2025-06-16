@@ -104,9 +104,9 @@ Thank you for registering`);
         <input
           type="password"
           name="password"
-          minLength={4}
+          maxLength={4}
           required
-          // placeholder="password"
+          placeholder="max length 4"
         />
 
         <button className="btn" type="submit">
