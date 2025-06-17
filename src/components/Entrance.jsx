@@ -5,8 +5,11 @@ import Registration from "./Registration";
 
 const Entrance = ({ listsUsers, setObjUser }) => {
   const articleForm = useRef(); // Ссылка на форму
+  const [showPassword, setShowPassword] = useState(false);
   const [readMee, setReadMee] = useState(false);
   const [regWindow, setRegWindow] = useState(true);
+
+
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -52,7 +55,7 @@ const Entrance = ({ listsUsers, setObjUser }) => {
             className="entrance__form"
           >
             <div className="Login margin-bottom">
-              <label className="text_label" htmlFor="Login">
+              <label className="text_label" htmlFor="login">
                 Login
               </label>
               <input
@@ -68,13 +71,18 @@ const Entrance = ({ listsUsers, setObjUser }) => {
               <label className="text_label" htmlFor="password">
                 Password
               </label>
-              <input
-                name="password"
-                type="password"
-                id="password"
-                maxLength={12}
-                // placeholder="Password"
-              />
+              <div className="container_input">
+                <input
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  maxLength={4}
+                  // placeholder="Password"
+                />
+                <span className="eyes" onClick={() => setShowPassword((pr) => !pr)}>
+                  👁️
+                </span>
+              </div>
             </div>
 
             <button type="submit" className="btn">
@@ -82,7 +90,6 @@ const Entrance = ({ listsUsers, setObjUser }) => {
             </button>
           </form>
 
-          {/* <div className="container margin__top"> */}
           <button
             className="btn_reg margin__top"
             onClick={() => setRegWindow((pr) => !pr)}

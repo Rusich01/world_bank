@@ -1,7 +1,8 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const Registration = ({ listsUsers, setRegWindow }) => {
   const formRegistration = useRef();
+  const [showPassword, setShowPassword] = useState(false);
 
   const newDataObj = listsUsers.filter((element) => element.login.length >= 3); // Пустые объекты для юзеров
 
@@ -89,7 +90,7 @@ Thank you for registering`);
           type="text"
           name="lastName"
           required
-          // placeholder="lastName"
+          // placeholder="lastName"пше
         />
 
         <label>Email</label>
@@ -101,13 +102,18 @@ Thank you for registering`);
         />
 
         <label>password</label>
-        <input
-          type="password"
-          name="password"
-          maxLength={12}
-          required
-          placeholder="max length 4"
-        />
+        <div className="container_input">
+          <input
+            type={showPassword ? "text" : "password"}
+            name="password"
+            maxLength={4}
+            required
+            // placeholder="max length 4"
+          />
+          <span className="eyes" onClick={() => setShowPassword((pr) => !pr)}>
+            👁️
+          </span>
+        </div>
 
         <button className="btn" type="submit">
           Send

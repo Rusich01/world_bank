@@ -10,10 +10,16 @@ const Index = ({ objUser, setObjUser, listsUsers }) => {
     setMovements(sum);
   }, [objUser, listsUsers]);
 
+  // Функция приводит первуую букву в верхний реестр
+  const upperCaseName = (str) =>
+    `${str[0].toUpperCase()}${str.slice(1).toLowerCase()}`;
+
   return (
     <div>
       <div className="index_header">
-        <p>{`Welcome ${objUser.name} ${objUser.lastName}`}</p>
+        <p>{`Welcome ${upperCaseName(objUser.name)} ${upperCaseName(
+          objUser.lastName
+        )}`}</p>
         <button onClick={() => setObjUser({})} className="btn_out">
           Out
         </button>

@@ -127,6 +127,7 @@ input {
   background-color: #011211;
   border-radius: 1rem;
   overflow-y: auto;
+
 }
 
 .movements__row {
@@ -350,6 +351,15 @@ h2 {
 }
 .label__registration {
   margin: 10px 0;
+}
+.container_input {
+  position: relative;
+}
+.eyes {
+  position: absolute;
+  top: -2px;
+  right: 2px;
+  cursor: pointer;
 }
 
 /* ********************* Mobile size ************************* */
